@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DFA Minimizer | Midnight Edition</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.21.1/cytoscape.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h1 class="header-title">DFA Minimization Visualizer</h1>
+
+    <div class="card">
+        <h3 style="color: var(--primary); margin-top:0;">Step 1: Define DFA Structure</h3>
+        <div class="input-row">
+            <input type="text" id="states" placeholder="States (e.g., q0,q1,q2,q3)" value="q0,q1,q2,q3">
+            <input type="text" id="alphabet" placeholder="Alphabet (e.g., 0,1)" value="0,1">
+            <button class="btn-gen" onclick="initTable()">Create Transition Table</button>
+        </div>
+    </div>
+
+    <div class="card" id="trans-card" style="display:none;">
+        <h3 style="color: var(--success); margin-top:0;">Step 2: Define Transitions & Finals</h3>
+        <div id="table-area"></div>
+        <div class="input-row" style="margin-top:20px;">
+            <input type="text" id="start" placeholder="Start State" value="q0">
+            <input type="text" id="finals" placeholder="Final States (e.g., q2)" value="q2">
+        </div>
+        <button class="btn-min" onclick="processMinimization()">Start Minimization Logic</button>
+    </div>
+
+    <div id="step-controls" class="card" style="display:none; text-align: center; border: 1px solid var(--primary);">
+        <h3 style="margin-top:0; font-size: 1.1rem;">Algorithm Walkthrough</h3>
+        <p id="step-description" style="color: #94a3b8; font-size: 0.9rem;">Ready to begin.</p>
+        <div style="display: flex; justify-content: center; gap: 10px; margin-top: 15px;">
+            <button id="btn-next" class="btn-gen" onclick="renderNextStep()">Next Step</button>
+            <button class="btn-min" style="width: auto; background: #475569;" onclick="location.reload()">Reset All</button>
+        </div>
+    </div>
+
+    <div class="viz-grid">
+        <div class="col">
+            <h3 class="label">Original DFA Graph</h3>
+            <div id="cy-orig" class="cy-box"></div>
+        </div>
+        <div class="col">
+            <h3 class="label">Step-by-Step Partition Table</h3>
+            <div id="partition-box" class="log-box">Waiting for transitions...</div>
+        </div>
+        <div class="col">
+            <h3 class="label">Minimized Result</h3>
+            <div id="min-table-area" style="margin-bottom: 15px;"></div>
+            <div id="cy-min" class="cy-box"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
